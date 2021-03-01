@@ -1,7 +1,13 @@
 import { Box, Button, Card, TextField } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 
-const AddTodo = ({ textValue, handleChange, addTodo }) => {
+const AddTodo = ({ addTodo }) => {
+	const [textValue, setTextValue] = useState('');
+
+	const handleChange = (event) => {
+		setTextValue(event.target.value);
+	};
+
 	return (
 		<div>
 			<Card style={{ width: 500, padding: 20, display: 'flex' }} elevation={4}>
@@ -14,7 +20,10 @@ const AddTodo = ({ textValue, handleChange, addTodo }) => {
 					/>
 				</Box>
 				<Box>
-					<Button color='primary' variant='contained' onClick={addTodo}>
+					<Button
+						color='primary'
+						variant='contained'
+						onClick={() => addTodo(textValue)}>
 						{' '}
 						Add{' '}
 					</Button>

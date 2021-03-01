@@ -5,21 +5,16 @@ import TodoList from './components/TodoList';
 
 function App() {
 	const [todoList, setTodoList] = useState([]);
-	const [textValue, setTextValue] = useState('');
 	const [idCount, setIdCount] = useState(0);
 
 	const incrementId = () => {
 		setIdCount(idCount + 1);
 	};
 
-	const addTodo = () => {
+	const addTodo = (textValue) => {
 		const newTodoList = [...todoList, { id: idCount, name: textValue }];
 		incrementId();
 		setTodoList(newTodoList);
-	};
-
-	const handleChange = (event) => {
-		setTextValue(event.target.value);
 	};
 
 	const deleteTodo = (id) => {
@@ -31,11 +26,7 @@ function App() {
 		<div className='App'>
 			<Container align='center'>
 				<Typography variant='h3'> Todo List </Typography>
-				<AddTodo
-					addTodo={addTodo}
-					handleChange={handleChange}
-					textValue={textValue}
-				/>
+				<AddTodo addTodo={addTodo} />
 				<TodoList todoList={todoList} deleteTodo={deleteTodo} />
 			</Container>
 		</div>
