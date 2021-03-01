@@ -1,8 +1,13 @@
-import { Box, Button, Card, TextField } from '@material-ui/core';
+import { Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 
 const AddTodo = ({ addTodo }) => {
 	const [textValue, setTextValue] = useState('');
+	const [behavior, setBehavior] = useState('add');
+
+	const toggle = () => {
+		behavior === 'add' ? setBehavior('search') : setBehavior('add');
+	};
 
 	const handleChange = (event) => {
 		setTextValue(event.target.value);
@@ -10,24 +15,32 @@ const AddTodo = ({ addTodo }) => {
 
 	return (
 		<div>
-			<Card style={{ width: 500, padding: 20, display: 'flex' }} elevation={4}>
-				<Box width='80%'>
-					<TextField
-						fullWidth='true'
-						placeholder='Todo name...'
-						value={textValue}
-						onChange={handleChange}
-					/>
-				</Box>
-				<Box>
-					<Button
-						color='primary'
-						variant='contained'
-						onClick={() => addTodo(textValue)}>
-						{' '}
-						Add{' '}
-					</Button>
-				</Box>
+			<Card elevation={4} style={{ width: 600 }}>
+				<CardContent>
+					<Grid container spacing={2}>
+						<Grid item xs={8}>
+							<TextField
+								fullWidth
+								placeholder='Todo name...'
+								value={textValue}
+								onChange={handleChange}
+							/>
+						</Grid>
+						<Grid item xs={2}>
+							<Button
+								color='primary'
+								variant='contained'
+								onClick={() => addTodo(textValue)}>
+								{behavior}
+							</Button>
+						</Grid>
+						<Grid item xs={2}>
+							<Button color='secondary' variant='contained' onClick={toggle}>
+								Toggle
+							</Button>
+						</Grid>
+					</Grid>
+				</CardContent>
 			</Card>
 		</div>
 	);
