@@ -1,11 +1,12 @@
 import { Typography, Container } from '@material-ui/core';
 import { useState } from 'react';
-import AddTodo from './components/AddTodo';
+import ToolBar from './components/ToolBar';
 import TodoList from './components/TodoList';
 
 function App() {
 	const [todoList, setTodoList] = useState([]);
 	const [idCount, setIdCount] = useState(0);
+	const [filterTerm, setFilterTerm] = useState('');
 
 	const incrementId = () => {
 		setIdCount(idCount + 1);
@@ -26,8 +27,12 @@ function App() {
 		<div className='App'>
 			<Container align='center'>
 				<Typography variant='h3'> Todo List </Typography>
-				<AddTodo addTodo={addTodo} />
-				<TodoList todoList={todoList} deleteTodo={deleteTodo} />
+				<ToolBar addTodo={addTodo} setFilter={setFilterTerm} />
+				<TodoList
+					todoList={todoList}
+					deleteTodo={deleteTodo}
+					filterTerm={filterTerm}
+				/>
 			</Container>
 		</div>
 	);
