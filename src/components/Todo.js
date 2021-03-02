@@ -1,30 +1,43 @@
-import { Box, Card, IconButton, Typography } from '@material-ui/core';
+import {
+	Card,
+	CardContent,
+	Grid,
+	IconButton,
+	Typography,
+} from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
+import EditIcon from '@material-ui/icons/Edit';
 
 const styles = {
 	Card: {
-		height: 60,
-		padding: 10,
-		width: 500,
-		display: 'flex',
-		alignItems: 'center',
-		margin: 20,
+		height: 75,
+		margin: 40,
+		width: 650,
 	},
 };
 
 const Todo = ({ id, children, del }) => {
 	return (
 		<Card elevation={4} style={styles.Card}>
-			<Box align='left' width='90%'>
-				<Typography>
-					#{id} - {children}
-				</Typography>
-			</Box>
-			<Box align='right'>
-				<IconButton onClick={() => del(id)} color='secondary'>
-					<Delete />
-				</IconButton>
-			</Box>
+			<CardContent>
+				<Grid container>
+					<Grid item xs={10} align='left'>
+						<Typography>
+							#{id} - {children}
+						</Typography>
+					</Grid>
+
+					<Grid item>
+						<IconButton>
+							<EditIcon />
+						</IconButton>
+
+						<IconButton onClick={() => del(id)} color='secondary'>
+							<Delete />
+						</IconButton>
+					</Grid>
+				</Grid>
+			</CardContent>
 		</Card>
 	);
 };
