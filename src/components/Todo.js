@@ -3,32 +3,50 @@ import {
 	CardContent,
 	Grid,
 	IconButton,
+	TextField,
 	Typography,
 } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import EditIcon from '@material-ui/icons/Edit';
+import { useState } from 'react';
 
 const styles = {
 	Card: {
 		height: 75,
-		margin: 40,
+		margin: 25,
 		width: 650,
 	},
 };
 
-const Todo = ({ id, children, del }) => {
+const Todo = ({ id, children, del, editTodo }) => {
+	const [editState, setEditState] = useState(false);
+	const [editText, setEditText] = useState(children);
+
+	const toggleEdit = () => {
+		setEditState(!editState);
+		if (editState) editTodo(id, editText);
+	};
+
+	const handleChange = (event) => {
+		setEditText(event.target.value);
+	};
+
 	return (
 		<Card elevation={4} style={styles.Card}>
 			<CardContent>
 				<Grid container>
 					<Grid item xs={10} align='left'>
-						<Typography>
-							#{id} - {children}
-						</Typography>
+						{!editState ? (
+							<Typography variant='h6'>
+								#{id} - {children}
+							</Typography>
+						) : (
+							<TextField fullWidth value={editText} onChange={handleChange} />
+						)}
 					</Grid>
 
 					<Grid item>
-						<IconButton>
+						<IconButton onClick={toggleEdit}>
 							<EditIcon />
 						</IconButton>
 

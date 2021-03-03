@@ -23,6 +23,14 @@ function App() {
 		setTodoList(newTodoList);
 	};
 
+	const editTodo = (id, value) => {
+		const newTodoList = todoList.map((todo) => {
+			if (todo.id === id) todo.name = value;
+			return todo;
+		});
+		setTodoList(newTodoList);
+	};
+
 	return (
 		<div className='App'>
 			<Container align='center'>
@@ -32,6 +40,7 @@ function App() {
 					todoList={todoList}
 					deleteTodo={deleteTodo}
 					filterTerm={filterTerm}
+					editTodo={editTodo}
 				/>
 			</Container>
 		</div>
