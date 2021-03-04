@@ -35,14 +35,24 @@ const Todo = ({ id, children, del, editTodo }) => {
 		<Card elevation={4} style={styles.Card}>
 			<CardContent>
 				<Grid container>
-					<Grid item xs={10} align='left'>
-						{!editState ? (
-							<Typography variant='h6'>
-								#{id} - {children}
-							</Typography>
-						) : (
-							<TextField fullWidth value={editText} onChange={handleChange} />
-						)}
+					<Grid item container xs={10} align='left'>
+						<Grid item>
+							<Typography variant='h6'>#{id} - </Typography>
+						</Grid>
+						<Grid item xs={10}>
+							{!editState ? (
+								<Typography variant='h6'>{children}</Typography>
+							) : (
+								<TextField
+									fullWidth
+									value={editText}
+									onChange={handleChange}
+									onKeyPress={(e) => {
+										if (e.key === 'Enter') toggleEdit();
+									}}
+								/>
+							)}
+						</Grid>
 					</Grid>
 
 					<Grid item>

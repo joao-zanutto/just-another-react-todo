@@ -27,6 +27,9 @@ const ToolBar = ({ addTodo, setFilter }) => {
 								placeholder={behavior === 'add' ? 'Add todo' : 'Filter todos'}
 								value={textValue}
 								onChange={handleChange}
+								onKeyPress={(e) => {
+									if (e.key === 'Enter') addTodo(textValue);
+								}}
 							/>
 						</Grid>
 						<Grid item xs={1}>
