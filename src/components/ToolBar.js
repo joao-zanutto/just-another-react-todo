@@ -1,10 +1,4 @@
-import {
-	Button,
-	Card,
-	CardContent,
-	Grid,
-	TextField,
-} from '@material-ui/core';
+import { Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -13,7 +7,7 @@ const ToolBar = ({ addTodo, setFilter }) => {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	const handleChangeTodo = (event) => {
-		setTextValue('1');
+		setTextValue(event.target.value);
 	};
 
 	const handleChangeSearch = (event) => {
