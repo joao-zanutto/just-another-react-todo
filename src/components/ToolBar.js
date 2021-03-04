@@ -1,19 +1,24 @@
-import { Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import {
+	Button,
+	Card,
+	CardContent,
+	Grid,
+	TextField,
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
-import LoopIcon from '@material-ui/icons/Loop';
 
 const ToolBar = ({ addTodo, setFilter }) => {
 	const [textValue, setTextValue] = useState('');
-	const [behavior, setBehavior] = useState('add');
+	const [searchTerm, setSearchTerm] = useState('');
 
-	const toggle = () => {
-		behavior === 'add' ? setBehavior('search') : setBehavior('add');
+	const handleChangeTodo = (event) => {
+		setTextValue('1');
 	};
 
-	const handleChange = (event) => {
-		setTextValue(event.target.value);
+	const handleChangeSearch = (event) => {
+		setSearchTerm(event.target.value);
+		setFilter(event.target.value);
 	};
 
 	return (
@@ -21,38 +26,32 @@ const ToolBar = ({ addTodo, setFilter }) => {
 			<Card elevation={4} style={{ width: 800 }}>
 				<CardContent>
 					<Grid container spacing={1}>
-						<Grid item xs={10}>
+						<Grid item xs={11}>
 							<TextField
 								fullWidth
-								placeholder={behavior === 'add' ? 'Add todo' : 'Filter todos'}
+								placeholder={'Add todo'}
 								value={textValue}
-								onChange={handleChange}
+								onChange={handleChangeTodo}
 								onKeyPress={(e) => {
 									if (e.key === 'Enter') addTodo(textValue);
 								}}
 							/>
 						</Grid>
 						<Grid item xs={1}>
-							{behavior === 'add' ? (
-								<Button
-									color='primary'
-									variant='contained'
-									onClick={() => addTodo(textValue)}>
-									<AddIcon color='inherit' />
-								</Button>
-							) : (
-								<Button
-									color='secondary'
-									variant='contained'
-									onClick={() => setFilter(textValue)}>
-									<SearchIcon />
-								</Button>
-							)}
-						</Grid>
-						<Grid item xs={1}>
-							<Button variant='contained' onClick={toggle}>
-								<LoopIcon />
+							<Button
+								color='primary'
+								variant='contained'
+								onClick={() => addTodo(textValue)}>
+								<AddIcon color='inherit' />
 							</Button>
+						</Grid>
+						<Grid item xs={8}>
+							<TextField
+								fullWidth
+								placeholder={'Filter todos'}
+								value={searchTerm}
+								onChange={handleChangeSearch}
+							/>
 						</Grid>
 					</Grid>
 				</CardContent>
